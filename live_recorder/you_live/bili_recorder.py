@@ -94,7 +94,7 @@ class BiliRecorder(BaseRecorder):
                             self.live_qn = codec_info['current_qn']
                             url_info = codec_info['url_info'][0]
                             self.live_url = url_info['host'] + codec_info['base_url'] + url_info['extra']
-                            print("申请清晰度 %s的链接，得到清晰度 %d的链接"%(qn, self.live_qn))
+                            print("申请清晰度 %s 的链接，得到清晰度 %d 的链接" % (qn, self.live_qn))
                             self.download_headers = {
                                 'Accept': 'application/json, text/plain, */*',
                                 'Accept-Encoding': 'gzip, deflate, br',
@@ -113,7 +113,7 @@ class BiliRecorder(BaseRecorder):
         data_json = requests.get(url, timeout=10, headers=self.headers).json()['data']
         self.live_url = data_json['durl'][0]['url']
         self.live_qn = data_json['current_qn']
-        print("申请清晰度 %s的链接，得到清晰度 %d的链接"%(qn, self.live_qn))
+        print("申请清晰度 %s 的链接，得到清晰度 %d 的链接"%(qn, self.live_qn))
         self.download_headers = {
             'Accept': 'application/json, text/plain, */*',
             'Accept-Encoding': 'gzip, deflate, br',

@@ -1,6 +1,6 @@
 import argparse
-from live_recorder import you_live
-from live_recorder import version
+
+from live_recorder import version, you_live
 
 args = None
 
@@ -69,7 +69,7 @@ def main():
             exit(0)
         if debug:
             print(live_url)
-        download_thread = you_live.DownloadThread(recorder)
+        download_thread = you_live.DownloadThread(recorder, qn=qn)
         monitoring_thread = you_live.MonitoringThread(recorder)
            
         download_thread.start()

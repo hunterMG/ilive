@@ -88,15 +88,56 @@ class BaseRecorder:
                 
                 path = os.path.abspath('{}/{}.flv'.format(self.save_folder, filename))
             
-            with open(path,"wb") as file:
-                response = requests.get(self.live_url, stream=True, headers=headers, timeout=120)
-                for data in response.iter_content(chunk_size=1024*1024):
-                    if not self.downloadFlag:
+            first_chunk = True
+            retry_count = 0
+            max_retries = 5
+            
+            while self.downloadFlag:
+                if first_chunk:
+                    mode = "wb"
+                    first_chunk = False
+                else:
+                    mode = "ab"
+                    print("检测到流断开，正在重新获取直播地址...")
+                    time.sleep(3)
+                    live_url = self.getLiveUrl(qn)
+                    
+                    if live_url is None:
+                        if retry_count >= max_retries:
+                            print("主播已下播，停止录制")
+                            break
+                        retry_count += 1
+                        print("获取直播地址失败，10秒后重试(%d/%d)..." % (retry_count, max_retries))
+                        time.sleep(10)
+                        continue
+                
+                if self.debug:
+                    print("[debug] 下载URL: %s" % self.live_url)
+                chunk_count = 0
+                with open(path, mode) as file:
+                    response = requests.get(self.live_url, stream=True, headers=headers, timeout=120)
+                    for data in response.iter_content(chunk_size=1024*1024):
+                        if not self.downloadFlag:
+                            break
+                        if data:
+                            file.write(data)
+                            self.downloaded += len(data)
+                            chunk_count += 1
+                    response.close()
+                
+                if not self.downloadFlag:
+                    break
+                
+                if chunk_count == 0:
+                    if retry_count >= max_retries:
+                        print("主播已下播，停止录制")
                         break
-                    if data:
-                        file.write(data)
-                        self.downloaded += len(data)
-                response.close()
+                    retry_count += 1
+                    print("未获取到直播数据，10秒后重试(%d/%d)..." % (retry_count, max_retries))
+                    time.sleep(10)
+                    continue
+                
+                retry_count = 0
             
             if '{endTime}' in path:
                 current_time = time.strftime(self.time_format, time.localtime())
@@ -106,7 +147,7 @@ class BaseRecorder:
                 os.rename(path, new_path)
                 path = new_path
             
-            if self.check_flv:
+            if self.downloaded > 0 and self.check_flv:
                 print("正在校准时间戳")
                 flv = Flv(path, self.flv_save_folder, self.debug)
                 flv.check()
