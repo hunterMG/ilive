@@ -110,9 +110,12 @@ class BiliRecorder(BaseRecorder):
                 pass
         
         url = "https://api.live.bilibili.com/room/v1/Room/playUrl?cid=%s&quality=%s&platform=web"%(self.roomInfo['room_id'], qn)
-        data_json = requests.get(url, timeout=10, headers=self.headers).json()['data']
-        self.live_url = data_json['durl'][0]['url']
-        self.live_qn = data_json['current_qn']
+        data_json = requests.get(url, timeout=10, headers=self.headers).json()
+        data = data_json.get('data')
+        if not data or not data.get('durl'):
+            return None
+        self.live_url = data['durl'][0]['url']
+        self.live_qn = data['current_qn']
         print("申请清晰度 %s 的链接，得到清晰度 %d 的链接"%(qn, self.live_qn))
         self.download_headers = {
             'Accept': 'application/json, text/plain, */*',
