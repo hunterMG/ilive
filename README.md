@@ -1,6 +1,14 @@
 you-live
 ===========================
 ![](https://img.shields.io/badge/Python-3-green.svg) ![](https://img.shields.io/badge/require-requests-green.svg)![](https://img.shields.io/badge/require-PyExecJS-green.svg)
+
+> [!WARNING]
+> This branch ([`you-live`](https://github.com/hunterMG/ilive/tree/you-live)) is maintained only to preserve the old `you-live` project.
+>
+> `v1.1.6.1` is based on `v1.1.6` and adds an auto-reconnect feature for unexpected stream disconnections.
+>
+> New features and bug fixes will be added to the [`ilive`](https://github.com/hunterMG/ilive/tree/ilive) branch instead of this one.
+
 ### Live Recorder
 A live recorder focus on China mainland livestream sites.   
 Brother Repo of [BilibiliLiveRecorder](https://github.com/nICEnnnnnnnLee/BilibiliLiveRecorder)(java)  
