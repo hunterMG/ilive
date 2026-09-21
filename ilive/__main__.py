@@ -1,11 +1,11 @@
 import argparse
 
-from live_recorder import version, you_live
+from ilive import version, recorder as recorder_module
 
 args = None
 
 def arg_parser():
-    parser = argparse.ArgumentParser(prog='you-live', description="version %s : %s"%(version.__version__, version.__descriptrion__))
+    parser = argparse.ArgumentParser(prog='ilive', description="version %s : %s"%(version.__version__, version.__descriptrion__))
     parser.add_argument("liver", help="要录制的直播源，如 bili,douyu,kuaishou,acfun")
     parser.add_argument("id", help="要录制的房间号，可以从url中直接获取")
     parser.add_argument("-qn", "-q", help="录制的清晰度，可以后续输入", required=False, default=None)
@@ -47,10 +47,10 @@ def main():
             print(args.cookies_path)
             print('指定cookie路径不存在')
     
-    recorder = you_live.Recorder.createRecorder(liver, args.id, **params)
+    live_recorder = recorder_module.Recorder.createRecorder(liver, args.id, **params)
      
     # 获取房间信息
-    roomInfo = recorder.getRoomInfo()
+    roomInfo = live_recorder.getRoomInfo()
     if debug:
         print(roomInfo)
      
@@ -62,23 +62,23 @@ def main():
         else:
             qn = input("输入要录制的清晰度\r\n")
              
-        live_url = recorder.getLiveUrl(qn = qn) 
+        live_url = live_recorder.getLiveUrl(qn = qn) 
         if args.only_url:
             print("以下为录制链接：")
             print(live_url)
             exit(0)
         if debug:
             print(live_url)
-        download_thread = you_live.DownloadThread(recorder, qn=qn)
-        monitoring_thread = you_live.MonitoringThread(recorder)
+        download_thread = recorder_module.DownloadThread(live_recorder, qn=qn)
+        monitoring_thread = recorder_module.MonitoringThread(live_recorder)
            
         download_thread.start()
         monitoring_thread.start()
            
-        while recorder.downloadFlag:
+        while live_recorder.downloadFlag:
             todo = input("输入q或stop停止录制\r\n")
             if todo == "q" or todo == "stop":
-                recorder.downloadFlag = False
+                live_recorder.downloadFlag = False
             else:
                 print("请输入合法命令！！！")
     else:

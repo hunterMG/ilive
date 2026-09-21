@@ -1,32 +1,27 @@
-you-live
-===========================
-![](https://img.shields.io/badge/Python-3-green.svg) ![](https://img.shields.io/badge/require-requests-green.svg)![](https://img.shields.io/badge/require-PyExecJS-green.svg)
+# iLive
 
-> [!WARNING]
-> This branch ([`you-live`](https://github.com/hunterMG/ilive/tree/you-live)) is maintained only to preserve the old `you-live` project.
->
-> `v1.1.6.1` is based on `v1.1.6` and adds an auto-reconnect feature for unexpected stream disconnections.
->
-> New features and bug fixes will be added to the [`ilive`](https://github.com/hunterMG/ilive/tree/ilive) branch instead of this one.
+![Python-3-green](https://img.shields.io/badge/Python-3-green.svg)
+![require-requests-green](https://img.shields.io/badge/require-requests-green.svg)
+![require-PyExecJS-green](https://img.shields.io/badge/require-PyExecJS-green.svg)
 
-### Live Recorder
-A live recorder focus on China mainland livestream sites.   
-Brother Repo of [BilibiliLiveRecorder](https://github.com/nICEnnnnnnnLee/BilibiliLiveRecorder)(java)  
+A live recorder for Chinese livestream sites.
+Fork of [LiveRecorder](https://github.com/nICEnnnnnnnLee/LiveRecorder).
 
-    
+This fork is independently released as **iLive** (`ilive`) because the upstream project is no longer maintained.
+
 ****
 ## :dolphin:Installation
 ```
 Linux/debian:
 
     sudo apt-get install python3-pip
-    pip3 install you-live --upgrade --user
+    pip3 install ilive --upgrade --user
     add ~/.local/bin to your PATH
 
 Windows:
 
     install python3 from python.org
-    pip install --upgrade you-live
+    pip install --upgrade ilive
 
 Other Linux: please follow debian
 
@@ -35,7 +30,7 @@ Other OS: please DIY.
 
 ## :dolphin:Usage
 ```
-you-live [-h] [-qn QN] [-debug] [-check] [-delete] [-save_path SAVE_PATH] [-check_path CHECK_PATH]
+ilive [-h] [-qn QN] [-debug] [-check] [-delete] [-save_path SAVE_PATH] [-check_path CHECK_PATH]
                 [-format FORMAT] [-time_format TIME_FORMAT] [-cookies COOKIES] [-cookies_path COOKIES_PATH]
                 liver id
 
@@ -69,13 +64,13 @@ optional arguments:
 ### Example0
 Record a live from <https://live.bilibili.com/6>
 ```
-you-live bili 6
+ilive bili 6
 ```
 
 ### Example1
 Record a live from <https://www.douyu.com/593392>, correct the timestamp error and delete the origin files.
 ```
-you-live -check -d douyu 593392
+ilive -check -d douyu 593392
 ```
 **Notice**:The record on this site(douyu) uses PyExecJS.  
 You may need some extra installation about the JS Environment for linux OS.  
@@ -87,12 +82,14 @@ Here’s the guide for [Node.js installation](https://github.com/nodesource/dist
 ### Example2
 Record a live from <https://live.kuaishou.com/u/ZFYS8888>, speicify the file name you want.
 ```
-you-live -format "{name}-{shortId} 的{liver}直播{startTime}" -cookies "clientid=3; did=web_0000000000000000000000000000000; client_key=00000000; xxx=xxx; ..." kuaishou ZFYS8888
+ilive -format "{name}-{shortId} 的{liver}直播{startTime}" -cookies "clientid=3; did=web_0000000000000000000000000000000; client_key=00000000; xxx=xxx; ..." kuaishou ZFYS8888
 ```
 **Notice**:You must need cookies(may not logged-in, just skip the captha test) to get room detail information
 
 
 ## :dolphin:LICENSE
-MIT 
+AGPL-3.0-or-later.
 
-
+The original `LiveRecorder` code remains available under its upstream MIT
+license; see [LICENSE-MIT.txt](LICENSE-MIT.txt). The fork changes and this
+distribution are released under AGPL-3.0-or-later; see [LICENSE.txt](LICENSE.txt).

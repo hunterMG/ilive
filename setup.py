@@ -1,40 +1,32 @@
 import setuptools
-import os
-from live_recorder import version
+from ilive import version
 
 with open("README.md", "r", encoding = 'utf-8') as fh:
     long_description  =  fh.read()
 
-def find_packages(*tops):
-    packages = []
-    for d in tops:
-        for root, dirs, files in os.walk(d, followlinks=True):
-            if '__init__.py' in files:
-                packages.append(root)
-    return packages
-
 REQ  =  ['PyExecJS', 'requests']
 
 setuptools.setup(
-    name = "you-live",
+    name = "ilive",
     version = version.__version__,
     description = version.__descriptrion__,
-    author = "NiceLee",
-    author_email = "lijia0732@sina.com",
-    license = "MIT",
+    author = "hunterMG",
+    license = "AGPL-3.0-or-later",
+    license_expression = "AGPL-3.0-or-later",
     long_description = long_description,
     long_description_content_type = "text/markdown",
-    url = "https://github.com/nICEnnnnnnnLee/LiveRecorder",
-    requires = REQ,
+    url = "https://github.com/hunterMG/ilive",
+    project_urls = {
+        "Upstream": "https://github.com/nICEnnnnnnnLee/LiveRecorder",
+    },
     install_requires = REQ,
     zip_safe = True,
-    packages = find_packages('live_recorder'),
+    packages = setuptools.find_packages(),
     classifiers = [
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: End Users/Desktop",
         "Environment :: Console",
-        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
@@ -54,6 +46,6 @@ setuptools.setup(
         "Topic :: Multimedia :: Video"
     ],
     entry_points={
-        "console_scripts": ["you-live=live_recorder.__main__:main"]
+        "console_scripts": ["ilive=ilive.__main__:main"]
     },
 )
