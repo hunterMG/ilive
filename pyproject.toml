@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ilive"
+version = "2026.9.20"
+description = "iLive - Live stream recorder for AcFun, Bilibili, Douyu, and Kuaishou."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "AGPL-3.0-or-later"
+authors = [{ name = "hunterMG" }]
+dependencies = [
+    "requests>=2.32.0,<3",
+    "PyExecJS>=1.5.1",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Multimedia",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Multimedia :: Video",
+]
+[project.urls]
+Homepage = "https://github.com/hunterMG/ilive"
+Upstream = "https://github.com/nICEnnnnnnnLee/LiveRecorder"
+
+[project.scripts]
+ilive = "ilive.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["ilive*"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.13.0",
+    "ty>=0.0.1",
+    "pre-commit>=4.3.0",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+include = ["ilive/**/*.py", "test/**/*.py"]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.ty.environment]
+python-version = "3.11"
+
+# The recorder uses runtime-registered classes and dynamically populated
+# response objects. Keep Ty as a syntax/type gate while allowing those legacy
+# dynamic attributes and request-header values.
+[tool.ty.rules]
+unresolved-attribute = "ignore"
+invalid-argument-type = "ignore"

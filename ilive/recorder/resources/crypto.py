@@ -1,5 +1,4 @@
-
-crypto_js = '''
+crypto_js = """
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -52,4 +51,4 @@ function doencodepsw(psw, code, acc) {
 function doencodeacc(acc, code) {
     return "[p]" + CryptoJS.e(acc, code);
 }
-'''
+"""

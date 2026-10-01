@@ -1,5 +1,7 @@
 # iLive
 
+![PyPI Python Version](https://img.shields.io/pypi/pyversions/:ilive)
+[![Python Versions](https://shields.io)](https://pypi.org/project/ilive/)
 ![Python-3-green](https://img.shields.io/badge/Python-3-green.svg)
 ![require-requests-green](https://img.shields.io/badge/require-requests-green.svg)
 ![require-PyExecJS-green](https://img.shields.io/badge/require-PyExecJS-green.svg)
@@ -11,22 +13,21 @@ This fork is independently released as **iLive** (`ilive`) because the upstream 
 
 ****
 ## :dolphin:Installation
+
+Install with [uv](https://docs.astral.sh/uv/) and ensure `$HOME/.local/bin` is in your `$PATH`:
+
 ```
-Linux/debian:
-
-    sudo apt-get install python3-pip
-    pip3 install ilive --upgrade --user
-    add ~/.local/bin to your PATH
-
-Windows:
-
-    install python3 from python.org
-    pip install --upgrade ilive
-
-Other Linux: please follow debian
-
-Other OS: please DIY.
+uv tool install ilive
 ```
+
+For development, sync the locked environment and install the pre-commit hooks:
+
+```
+uv sync
+uv run pre-commit install
+```
+
+The project supports Python 3.11–3.14 releases.
 
 ## :dolphin:Usage
 ```
