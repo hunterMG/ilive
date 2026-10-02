@@ -82,9 +82,8 @@ def main():
         try:
             with open(args.cookies_path, 'r', encoding='utf-8') as f:
                 params['cookies'] = f.read()
-        except:
-            print(args.cookies_path)
-            print('指定cookie路径不存在')
+        except FileNotFoundError:
+            print('\033[33m指定cookie路径不存在: %s\033[0m' % args.cookies_path)
 
     live_recorder = recorder_module.Recorder.createRecorder(liver, args.id, **params)
 
