@@ -1,10 +1,7 @@
 # iLive
 
-![PyPI Python Version](https://img.shields.io/pypi/pyversions/:ilive)
-[![Python Versions](https://shields.io)](https://pypi.org/project/ilive/)
-![Python-3-green](https://img.shields.io/badge/Python-3-green.svg)
-![require-requests-green](https://img.shields.io/badge/require-requests-green.svg)
-![require-PyExecJS-green](https://img.shields.io/badge/require-PyExecJS-green.svg)
+[![PyPI Version](https://img.shields.io/pypi/v/ilive?color=%2334D058)](https://pypi.org/project/ilive)
+[![PyPI Python Version](https://img.shields.io/pypi/pyversions/ilive?color=%2334D058)](https://pypi.org/project/ilive)
 
 A live recorder for Chinese livestream sites.
 Fork of [LiveRecorder](https://github.com/nICEnnnnnnnLee/LiveRecorder).
